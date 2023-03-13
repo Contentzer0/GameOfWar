@@ -50,14 +50,18 @@ class GameOfWar {
         // console.log(this.hand2)
     }
     war() {
-        let warHand1 = this.p1.splice[0, 4]
-        let warHand2 = this.p2.splice[0, 4]
+        let warHand1 = this.p1.splice(0, 4)
+        let warHand2 = this.p2.splice(0, 4)
         this.hand1.push(...warHand1)    
-        this.hand2.push(...warHand2)    
-        if (this.hand1[this.hand1.length-1].value > this.hand2[this.hand2.length-1].value) {
+        this.hand2.push(...warHand2)
+        let pl1 = this.hand1.length
+        let pl2 = this.hand2.length
+        console.log(this.hand1, pl1)
+        console.log(this.hand2, pl2)
+        if (this.hand1[pl1-1].value > this.hand2[pl2-1].value) {
             console.log("p1 wins the war") 
             this.p1.push(...this.hand1, ...this.hand2)
-        } else if (this.hand2[this.hand].value > this.hand1[4].value) {  
+        } else if (this.hand2[pl2-1].value > this.hand1[pl1-1].value) {  
             console.log("p2 wins the war") 
             this.p2.push(...this.hand1, ...this.hand2)
         } else {
