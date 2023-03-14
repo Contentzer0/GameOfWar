@@ -45,11 +45,11 @@ class GameOfWar {
     }
     draw() {
         this.hand1.push(this.p1.shift());
-        // console.log(this.hand1)
         this.hand2.push(this.p2.shift());
-        // console.log(this.hand2)
     }
     war() {
+        console.log(this.p1.length)
+        console.log(this.p2.length)
         let warHand1 = this.p1.splice(0, 4)
         let warHand2 = this.p2.splice(0, 4)
         this.hand1.push(...warHand1)    
@@ -58,31 +58,53 @@ class GameOfWar {
         let pl2 = this.hand2.length
         console.log(this.hand1, pl1)
         console.log(this.hand2, pl2)
-        if (this.hand1[pl1-1].value > this.hand2[pl2-1].value) {
+        if (this.p1.length == 0 || this.p2.length == 0 ) {
+        console.log("sure")
+        } else if (this.hand1[pl1-1].value > this.hand2[pl2-1].value) {
             console.log("p1 wins the war") 
             this.p1.push(...this.hand1, ...this.hand2)
+            this.hand1 = []
+            this.hand2 = []
+            this.draw()
+            this.battle()
+
         } else if (this.hand2[pl2-1].value > this.hand1[pl1-1].value) {  
             console.log("p2 wins the war") 
             this.p2.push(...this.hand1, ...this.hand2)
-        } else {
+            this.hand1 = []
+            this.hand2 = []
+            this.draw()
+            this.battle()
+        } else if (this.hand2[pl2-1].value = this.hand1[pl1-1].value) {   
+            this.war()   
 
+            
         }
     }
     battle() {
         if (this.hand1[0].value > this.hand2[0].value) {
-            return (console.log("p1 wins round!") + this.p1.push(...this.hand1, ...this.hand2))
+            console.log("p1 wins round!") + this.p1.push(...this.hand2, ...this.hand1)
+            this.hand1 = []
+            this.hand2 = []
+            this.draw()
+            this.battle()
         } else if (this.hand2[0].value > this.hand1[0].value) {
-            return (console.log("p2 wins round!") + this.p2.push(...this.hand1, ...this.hand2))
+            console.log("p2 wins round!") + this.p2.push(...this.hand1, ...this.hand2)
+            this.hand1 = []
+            this.hand2 = []
+            this.draw()
+            this.battle()
+        } else if (this.p1.length == 0 || this.p2.length == 0 ) {
+            console.log("sure") 
         } else {
             return this.war()
-        }
+        } 
             
     }
 
 }
 const game = new GameOfWar()
 console.log(game)
-console.log(game.p1.length)
-console.log(game.p2.length)
+
 
 
